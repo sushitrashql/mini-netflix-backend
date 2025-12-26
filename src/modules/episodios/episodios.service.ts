@@ -195,7 +195,6 @@ export class EpisodiosService {
       });
     }
 
-    // Si se está actualizando el número de capítulo, verificar que no exista otro episodio con ese número en la misma serie
     if (
       updateEpisodioDto.numeroCapitulo &&
       updateEpisodioDto.numeroCapitulo !== episodio.numeroCapitulo

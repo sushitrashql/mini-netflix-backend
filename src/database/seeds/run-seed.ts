@@ -29,15 +29,28 @@ const estadosSeed: EstadoSeed[] = [
 ];
 
 async function runSeed() {
-  const dataSource = new DataSource({
-    type: 'postgres',
-    host: process.env.DB_HOST,
-    port: Number(process.env.DB_PORT),
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
-    synchronize: false,
-  });
+  // Configuración usando DATABASE_URL o credenciales individuales
+  const dataSourceConfig = process.env.DATABASE_URL
+    ? {
+        type: 'postgres' as const,
+        url: process.env.DATABASE_URL,
+        ssl: {
+          rejectUnauthorized: false,
+        },
+        synchronize: false,
+      }
+    : {
+        type: 'postgres' as const,
+        host: process.env.DB_HOST,
+        port: Number(process.env.DB_PORT),
+        username: process.env.DB_USERNAME,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_DATABASE,
+        synchronize: false,
+        ssl: false,
+      };
+
+  const dataSource = new DataSource(dataSourceConfig);
 
   try {
     await dataSource.initialize();
@@ -72,8 +85,11 @@ async function runSeed() {
     console.log('🎉 Seed de estados completado exitosamente');
   } catch (error) {
     console.error('❌ Error ejecutando seed:', error);
+    throw error;
   } finally {
-    await dataSource.destroy();
+    if (dataSource.isInitialized) {
+      await dataSource.destroy();
+    }
   }
 }
 

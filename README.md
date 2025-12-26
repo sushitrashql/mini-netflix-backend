@@ -1,108 +1,60 @@
 # 🎬 Mini Netflix API
 
-API RESTful para gestión de series y episodios desarrollada con NestJS, PostgreSQL y TypeORM proyecto de Curso de Posgrado UPEA.
+API RESTful para gestión de series y episodios desarrollada con NestJS, PostgreSQL y TypeORM. Proyecto del Curso de Postgrado en Desarrollo de Aplicaciones Web - UPEA.
 
-## 🚀 Características
+[![Node.js](https://img.shields.io/badge/Node.js-20.18.0-green.svg)](https://nodejs.org/)
+[![NestJS](https://img.shields.io/badge/NestJS-10.x-red.svg)](https://nestjs.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14+-blue.svg)](https://www.postgresql.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org/)
 
-- ✅ Autenticación JWT con roles (Admin/User)
-- ✅ CRUD completo de Series y Episodios
-- ✅ Relaciones Many-to-Many entre Usuarios y Roles
-- ✅ Soft Delete y auditoría completa
-- ✅ Manejo de errores centralizado
-- ✅ Respuestas estandarizadas (ServiceResponse)
-- ✅ Validaciones con class-validator
-- ✅ Documentación con Swagger
-- ✅ Paginación y filtros
 
 ## 📋 Requisitos
 
-- Node.js >= 20.18.0
-- PostgreSQL >= 14
-- Yarn
+- **Node.js** >= 20.18.0
+- **PostgreSQL** >= 15
+- **Yarn** (gestor de paquetes)
+- **Git**
 
 ## 🛠️ Instalación Local
+
+### 1. Clonar el repositorio
 ```bash
-# Clonar el repositorio
-git clone https://github.com/tu-usuario/mini-netflix-backend.git
+git clone https://github.com/emanuel2718/mini-netflix-backend.git
 cd mini-netflix-backend
-
-# Instalar dependencias
-yarn install
-
-# Configurar variables de entorno
-cp .env.example .env
-# Editar .env con tus credenciales
-
-# Ejecutar seeds
-yarn seed:estados
-yarn seed:roles
-
-# Iniciar en modo desarrollo
-yarn start:dev
 ```
 
-## 🌐 Variables de Entorno
+### 2. Instalar dependencias
+```bash
+yarn install
+```
+
+**`.env`**
 ```env
-NODE_ENV=production
+NODE_ENV=development
 PORT=3000
 API_PREFIX=api/v1
 
-DB_HOST=tu-host-postgres.render.com
+# Base de datos local
+DB_HOST=localhost
 DB_PORT=5432
-DB_USERNAME=tu-usuario
-DB_PASSWORD=tu-password
+DB_USERNAME=postgres
+DB_PASSWORD=postgres
 DB_DATABASE=mini_netflix_db
 
-JWT_SECRET=tu-super-secreto-seguro
+# O usar DATABASE_URL (para Render)
+# DATABASE_URL=postgresql://user:password@host:5432/database
+
+JWT_SECRET=tu_super_secreto_cambiar_en_produccion
 JWT_EXPIRATION=24h
 
-CORS_ORIGIN=https://tu-frontend.com
+CORS_ORIGIN=http://localhost:3000
 ```
-
-## 📚 API Endpoints
-
-### Autenticación
-- `POST /api/v1/auth/register` - Registrar usuario
-- `POST /api/v1/auth/login` - Iniciar sesión
-
-### Series (GET público, POST/PATCH/DELETE requiere ADMIN)
-- `GET /api/v1/series` - Listar series
-- `GET /api/v1/series/:id` - Obtener serie
-- `POST /api/v1/series` - Crear serie
-- `PATCH /api/v1/series/:id` - Actualizar serie
-- `DELETE /api/v1/series/:id` - Eliminar serie
-
-### Episodios (GET público, POST/PATCH/DELETE requiere ADMIN)
-- `GET /api/v1/episodios` - Listar episodios
-- `GET /api/v1/episodios/:id` - Obtener episodio
-- `GET /api/v1/episodios/serie/:idSerie` - Episodios de una serie
-- `POST /api/v1/episodios` - Crear episodio
-- `PATCH /api/v1/episodios/:id` - Actualizar episodio
-- `DELETE /api/v1/episodios/:id` - Eliminar episodio
-
-## 🧪 Testing
-```bash
-# Unit tests
-yarn test
-
-# E2E tests
-yarn test:e2e
-
-# Test coverage
-yarn test:cov
-```
-
-## 📦 Build
-```bash
-yarn build
-yarn start:prod
-```
-
 ## 👤 Autor
 
-**Emanuel García**
-- GitHub: [@tu-usuario](https://github.com/tu-usuario)
+**Emanuel Aracena**
+- GitHub: [@sushitrashql](https://github.com/sushitrashql)
 
-## 📄 Licencia
 
-MIT
+---
+
+**Desarrollado con ❤️ en La Paz, Bolivia**

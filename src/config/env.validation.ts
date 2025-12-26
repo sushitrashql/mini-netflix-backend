@@ -9,6 +9,7 @@ export const validationSchema = Joi.object({
   API_PREFIX: Joi.string().default('api/v1'),
 
   // Database
+  DATABASE_URL: Joi.string().optional(),
   DB_HOST: Joi.string().required(),
   DB_PORT: Joi.number().default(5432),
   DB_USERNAME: Joi.string().required(),
