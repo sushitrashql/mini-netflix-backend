@@ -2,8 +2,8 @@
 # exit on error
 set -o errexit
 
-echo "📦 Installing dependencies..."
-yarn install --frozen-lockfile
+echo "📦 Installing dependencies (including dev dependencies for build)..."
+yarn install --frozen-lockfile --production=false
 
 echo "🏗️  Building application..."
 yarn build
