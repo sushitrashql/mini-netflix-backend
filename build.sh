@@ -3,7 +3,7 @@
 set -o errexit
 
 echo "📦 Installing dependencies..."
-yarn install
+yarn install --frozen-lockfile
 
 echo "🏗️  Building application..."
 yarn build
