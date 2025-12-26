@@ -40,8 +40,10 @@ async function bootstrap() {
   const reflector = app.get(Reflector);
   app.useGlobalGuards(new JwtAuthGuard(reflector), new RolesGuard(reflector));
 
-  // Swagger - Solo en desarrollo y staging
-  if (process.env.NODE_ENV !== 'production') {
+  // Swagger - Habilitado si ENABLE_SWAGGER=true o en desarrollo
+  const enableSwagger = process.env.ENABLE_SWAGGER === 'true' || process.env.NODE_ENV === 'development';
+  
+  if (enableSwagger) {
     const config = new DocumentBuilder()
       .setTitle('Mini Netflix API')
       .setDescription('API RESTful para gestión de series y episodios')
@@ -61,15 +63,18 @@ async function bootstrap() {
 
     const document = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup('api/docs', app, document);
-    logger.log(`📚 Documentación Swagger: http://localhost:${process.env.PORT || 3000}/api/docs`);
+    logger.log(`📚 Documentación Swagger disponible en /api/docs`);
   }
 
   const port = process.env.PORT || 3000;
-  await app.listen(port, '0.0.0.0'); // ✅ Importante para Render
+  await app.listen(port, '0.0.0.0');
 
   logger.log(`🚀 Aplicación corriendo en: http://localhost:${port}`);
   logger.log(`🔗 API Prefix: /${apiPrefix}`);
   logger.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
+  if (enableSwagger) {
+    logger.log(`📚 Swagger Docs: http://localhost:${port}/api/docs`);
+  }
 }
 
 bootstrap();

@@ -7,7 +7,8 @@ export const validationSchema = Joi.object({
     .default('development'),
   PORT: Joi.number().default(3000),
   API_PREFIX: Joi.string().default('api/v1'),
-
+// Swagger
+  ENABLE_SWAGGER: Joi.boolean().default(false),
   // Database
   DATABASE_URL: Joi.string().optional(),
   DB_HOST: Joi.string().required(),
